@@ -35,7 +35,6 @@ def ItemDetail(request, pk):
 
 def login_view(request):
     if request.method == "POST":
-
         # Attempt to sign user in
         username = request.POST["username"]
         password = request.POST["password"]
@@ -122,7 +121,7 @@ def comment(request, pk):
             comment = request.POST.get("comment")
             Comment = CommentItem.objects.create(comment = comment, commentor = request.user, item = item)
             Comment.save()
-            messages.success(request, "Comment has been added.")
+            messages.success(request, "Comment has been added successfully.")
             return redirect(f"/{pk}")
         else:
             messages.warning(request, "Form validation has failed.")
