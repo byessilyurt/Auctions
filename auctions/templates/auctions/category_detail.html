@@ -1,0 +1,12 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <h3>Items in {{category}} category</h3> 
+    {% if item_list %}
+    {% include "auctions/snippet_items.html" %}
+    {% else %}
+    <p>No items found in this category!</p>
+    {% endif %}
+
+{% endblock %}

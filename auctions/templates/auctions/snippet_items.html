@@ -1,0 +1,19 @@
+{% load i18n %} 
+
+{% for item in item_list %}
+
+{% if item.is_active %}
+    <hr>
+    <a href="{% url 'item-detail' item.id %}">
+        <img src="{{ item.image.url }}" alt="{item.title}">
+        <p>{{item.title}}</p> 
+        <br>  
+    </a>
+        <p>{{item.date_published}}</p> 
+        <br>
+        <p>{{item.publisher}}</p> 
+        <br>
+
+{% endif%}
+
+{% endfor%}

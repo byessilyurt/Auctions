@@ -1,0 +1,77 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    {% if item.is_active %}
+    {{ item.title }} 
+    <hr>
+    <img src="{{ item.image.url}}" alt="">
+    {{item.starting_bid}}    
+    <br>
+    {{item.description}} <br>
+    <hr>
+    {% if not request.user == item.publisher %}
+    {% if added %}
+    <form action="{% url 'rem-watchlist' item.id %}" method="POST">
+        {% csrf_token %}
+        <input class="btn btn-danger" type="submit" value="Remove From Watchlist">
+    </form>
+    {% else %}
+    <form action="{% url 'add-watchlist' item.id %}" method="POST">
+        {% csrf_token %}
+        <input class="btn btn-primary" type="submit" value="Add to Watchlist">
+    </form>
+    {% endif %}
+    {% endif %}
+ <!--
+    work done!
+ -->
+
+    <hr>
+    
+    <h3> Comments.. </h3>
+    {% if not item.comments.all %}
+        <p>No comments on this item yet.</p>
+    {% else %}
+    {% for comment in item.comments.all %}
+        <strong>
+            {{ comment.commentor }}
+            {{ comment.date }}
+        </strong>  
+        <p>
+            {{ comment.comment }}
+        </p>
+    {% endfor %}
+    {% endif %}   
+    <hr>
+    {% if user.username %}
+    {%  if item.publisher == user %}
+    <form method="POST" action="{% url 'update-item' item.id%}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{update_form.as_p}}
+        <input type="submit" value="Update" >
+    </form>
+    {% endif %}
+    <hr>
+    <form method="POST" action="{% url 'comment-item' item.id%}">
+        {% csrf_token %}
+        {{comment_form.as_p}}
+        <input type="submit" value="Comment">
+    </form>
+    <hr>
+
+
+    
+    {% endif %}
+
+    <form method="POST" action="{% url 'bid-item' item.id%}" >
+        {% csrf_token %}
+        {{bid_form.as_p}}
+        <input type="submit" value="Bid">
+    </form>
+    {% else %}
+    <p>
+        Item is not active!
+    </p>
+    {% endif %}
+{% endblock %}

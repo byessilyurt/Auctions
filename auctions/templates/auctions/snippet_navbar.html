@@ -1,0 +1,43 @@
+{% load i18n %} 
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'item-list' %}">Active Listings</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'create' %}">Create Listing</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="{% url 'list-categories' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Categories
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'show-watchlist' %}" class="nav-link">Watchlist</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li>
+          <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+        </li>
+        <li>  
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+        {% else %}
+        <li>
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+        </li>
+        <li>
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+        {% endif %}
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-info my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>

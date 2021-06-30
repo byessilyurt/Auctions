@@ -1,0 +1,12 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+
+{% block body %}
+
+<img src=" {{ user.profile.img.url}}" alt="user-profile-image">
+<p>
+    {{user.username}}
+</p>
+
+{% endblock %}

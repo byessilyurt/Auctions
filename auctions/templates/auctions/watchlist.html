@@ -1,0 +1,34 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<h1>Your Watchlist</h1>
+{% if item_list %}
+
+{% for item in item_list %}
+
+{% if item.watching_item.is_active %}
+    <hr>
+    <a href="{% url 'item-detail' item.watching_item.id %}">
+    <img src="{{ item.watching_item.image.url }}" alt="{item.watching_item.title}">
+    {{item.watching_item.title}} 
+    <br>  
+    </a>
+    {{item.watching_item.date_published}}
+    <br>
+    {{item.watching_item.publisher}} 
+    <br>
+
+{% endif%}
+
+{% endfor%}
+
+{% else %}
+
+    <p>
+        No item on your Watchlist!
+    </p>
+
+{% endif%}
+
+{% endblock%}
