@@ -21,7 +21,8 @@ def ItemDetail(request, pk):
     update_form = updateItemForm(instance=item)
     comment_form = commentForm(instance=item)
     bid_form = bidForm(instance=item) 
-    if WatchList.objects.filter(watching_item=item, watcher= request.user):
+    currentUser = WatchList.objects.filter(watching_item=item, watcher= request.user)
+    if(currentUser):
         added= True
     context ={
     "added":added,    
